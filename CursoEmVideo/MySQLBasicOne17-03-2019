@@ -1,0 +1,134 @@
+/*Aula Criar banco de dados*/
+
+
+/*
+Tipos de linguagem SQL
+DDL "Data Definition Language" = Comandos de definição para o banco de dados.
+DML "Data Manipulation Language" = Comandos de manipulação de dados.
+
+*/
+
+
+/*
+Tipos primitivos 
+
+ Numero (
+	Inteiro = TinyInt, SmallInt, Int, MediumInt, BigInt 
+	Real = Decimal, Float, Double, Real
+	Lógico = Bit, Boolean
+ );
+ 
+ Data/Tempo = Data, DataTime, TimeStamp,Time, Year
+ 
+ Literal (
+	 Caractere = Char, VarChar
+	 Texto = TinyText, Text, MediumText, LongText
+	 Binário = TinyBlob, Blob, MediumBlob, LongBlob
+	 Coleção = Enum, Set
+ );
+ 
+ Espacial = Geometry, point, Polygon, MultiPllygon e etc..
+
+*/
+
+/*Creando base de dados*/
+create database cadastro;
+
+
+/*Comando para especificar a base de dados*/
+use cadastro;
+
+/* Exemplo de uma tabela*/
+
+/*Criando tabela*/
+create table pessoas (
+	nome varchar(30),
+	idade tinyint(3),
+	sexo char(1),
+	peso float,
+	altura float,
+	nacionalidade varchar(20)
+);
+
+
+/*Descrição da tabela X*/
+describe pessoas;
+
+
+/*Deleda base de dados*/
+drop database cadastro;
+
+/*Criando tabela mais completa*/
+
+
+/*Criando tabela com padrão "Latino Americano"*/
+create database cadastroDeCliente
+default character set utf8
+default collate utf8_general_ci;
+
+
+use cadastroDeCliente;
+
+
+create table pessoas(
+	id int NOT NULL AUTO_INCREMENT,
+	nome varchar (30) NOT NULL,
+    nasc date NOT NULL,
+    sexo enum('F','M','O'),
+    peso decimal(5,2),
+    altura decimal (3,2),
+    nacionalidade varchar(20) DEFAULT 'Brasil',
+    PRIMARY KEY (id)
+)DEFAULT CHARSET = utf8;
+
+
+describe pessoas;
+
+use cadastroDeCliente;
+
+
+insert into pessoas
+(id,nome,nasc,sexo,peso,altura,nacionalidade)
+values 
+('1000','Toni','1990-12-22','M','77.5','1.74','Brasil');
+
+
+select * from pessoas;
+
+
+insert into pessoas
+(nome,nasc,sexo,peso,altura,nacionalidade)
+values 
+('Samara','0000-06-13','F','66.6','1.70','Japão');
+
+
+insert into pessoas
+(nome,nasc,sexo,peso,altura,nacionalidade)
+values 
+('Einstein','1955-05-14','M','69.2','1.68','Alemão');
+
+
+insert into pessoas
+(nome,nasc,sexo,peso,altura)
+values 
+('Digo','1990-12-22','M','74.8','1.74');
+
+
+insert into pessoas
+(nome,nasc,sexo,peso,altura)
+values 
+('Excluir','2019-03-17','M','0.0','0.0');
+
+insert into pessoas
+(id,nome,nasc,sexo,peso,altura,nacionalidade)
+values 
+(DEFAULT,'Thais','1993-05-09','F','79.0','1.73',DEFAULT);
+
+insert into pessoas values
+(DEFAULT,'Mi','1989-12-23','F','62.3','1.63',DEFAULT);
+
+
+insert into pessoas value
+(DEFAULT,'Beethoven','2015-12-22','M','3.2','0.22',DEFAULT),
+(DEFAULT,'Bell','2014-12-22','F','2.7','0.21',DEFAULT),
+(DEFAULT,'Iza','2016-12-22','F','1.9','0.19',DEFAULT);
